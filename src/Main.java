@@ -1,11 +1,10 @@
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Scanner;
+import java.util.*;
 
 public class Main {
     public static void main(String[] args) {
         HashMap<Integer,Product> productmap = new HashMap<>();
         HashMap<Integer,Seller> sellermap = new HashMap<>();
+        ArrayList<Cart> cart = new ArrayList<>();
         Scanner sc = new Scanner(System.in);
         while (true){
             System.out.print("Options \n 1.Add Products \n 2.show products \n 3.Add Sellers \n 4.show Sellers \n 5.Add Stock \n 6.Show Stock \n 0.Exit \n");
@@ -77,6 +76,27 @@ public class Main {
                             i.getValue().showStocks();
                             System.out.println();
                         }
+                        break;
+
+                    case 7:
+                        System.out.println("Enter Product Id");
+                        int prodid = sc.nextInt();
+                        System.out.println("Enter the quantity needed");
+                        int quantity = sc.nextInt();
+                        cart = new ArrayList<>();
+                        long total = 0;
+                        if(productmap.containsKey(prodid)){
+                            cart=productmap.get(prodid).getProducts(quantity);
+                        }
+                        else{
+                            System.out.println("Enter Valid product Id");
+                        }
+                        System.out.println("S.No \t SellerId \t Price \t Quantity \t totalAmount");
+                        for (Cart c:cart){
+                            System.out.println(c.getCartId()+"\t"+c.getSellerId()+"\t"+c.getPrice()+"\t"+c.getQuantity()+"\t"+c.getTotalamount());
+                            total+=c.getTotalamount();
+                        }
+                        System.out.println("Total Amount: "+total);
                         break;
                     default:
                         break;

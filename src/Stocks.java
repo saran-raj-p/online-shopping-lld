@@ -17,7 +17,6 @@ public class Stocks {
     public long getPrice(){
         return this.price;
     }
-
     public void Decrease(int count){
         this.quantity -=count;
     }
